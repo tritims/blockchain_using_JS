@@ -1,5 +1,6 @@
 import { Block } from "./block";
 import { Blockchain } from "./blockchain";
+import _ from "lodash";
 
 let coin = new Blockchain();
 coin.addBlock(new Block("10/10/2019", { coin: 50 }));
@@ -16,16 +17,17 @@ function isChainValid(blockchain) {
     const prevBlock = blockchain.chain[i - 1];
 
     if (currentBlock.hash !== currentBlock.calculateHash()) {
+      write("hash fail...");
       return false;
     }
 
     if (currentBlock.prevHash !== prevBlock.hash) {
+      write("prevhash fail...");
       return false;
     }
 
-    if (blockchain.chain[0] !== blockchain.createGenisis()) {
-      write(blockchain.chain[0]);
-      write(blockchain.createGenisis());
+    if (!_.isEqual(blockchain.chain[0], blockchain.createGenisis())) {
+      write("genisis fail...");
       return false;
     }
   }
