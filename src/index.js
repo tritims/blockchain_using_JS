@@ -11,6 +11,7 @@ write(coin);
 write(isChainValid(coin));
 
 // Verify the validity of the chain
+//
 function isChainValid(blockchain) {
   for (let i = 1; i < blockchain.chain.length; i++) {
     const currentBlock = blockchain.chain[i];
